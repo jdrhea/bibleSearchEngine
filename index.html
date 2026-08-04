@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bible search engine</title>
+</head>
+<body>
+    <script src="en_kjv.js"></script>
+    <script>
+        let input = "Jesus"
+        let results = 0;
+        searchWordinVerse(input);
+        function searchWordinVerse(word)
+        {
+            for (let book in bible)
+            {
+                for (let chapter in bible[book])
+                {
+                    for (let verse in bible[book][chapter])
+                    {
+                        if (bible[book][chapter][verse].includes(word))
+                        {
+                            console.log(book + " " + chapter + ":" + verse);
+                            results++;
+                        }
+                    }
+                }
+            }
+            console.log("Found: " + results + " results")
+        
+        }
+    </script>
+</body>
+</html>
