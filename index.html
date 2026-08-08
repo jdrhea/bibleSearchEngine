@@ -7,19 +7,32 @@
 </head>
 <body>
     <script src="en_kjv.js"></script>
-    <script>
-        let input = "Jesus"
-        let results = 0;
-        searchWordinVerse(input);
+    <h1>Bible Dictionary</h1>
+    <div class = "search">
+        <input type="text" id="wordinput" name="wordinput">
+        <button onclick = "initializeWordSearch()">Search</button>
+    </div>
+    <div class = "results">
+        <p id="reusltstext">[Results]</p>
+    </div>
+</body>
+<script>
+        function initializeWordSearch()
+        {
+            let input = document.getElementById("wordinput").value.toLowerCase();
+            console.log(searchWordinVerse(input))
+        }
         function searchWordinVerse(word)
         {
+            let results = 0;
             for (let book in bible)
             {
                 for (let chapter in bible[book])
                 {
                     for (let verse in bible[book][chapter])
                     {
-                        if (bible[book][chapter][verse].includes(word))
+                        
+                        if (bible[book][chapter][verse].toLowerCase().includes(word))
                         {
                             console.log(book + " " + chapter + ":" + verse);
                             results++;
@@ -27,9 +40,8 @@
                     }
                 }
             }
-            console.log("Found: " + results + " results")
+            return "Found: " + results + " results \n" + results/31102 * 100 + "% of verses have " + word
         
         }
-    </script>
-</body>
+</script>
 </html>
