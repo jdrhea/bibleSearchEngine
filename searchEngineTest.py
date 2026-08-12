@@ -217,7 +217,19 @@ text = {
 
     10: "The discovery changed the historians' understanding of the region. The ancient people had not lived in an isolated settlement as many had believed. Instead, they had built roads, traded goods, cultivated fields, and maintained connections with communities many miles away."
 }
+
 import matplotlib.pyplot as plt
+import json
+
+with open("quran.json", "r", encoding="utf-8") as f:
+    quran_data = json.load(f)
+
+quran = {}
+for surah in quran_data:
+    quran[surah["transliteration"]] = {
+        verse["id"]: verse["translation"]
+        for verse in surah["verses"]
+    }
 
 # letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 words = []
@@ -225,28 +237,35 @@ words = []
 #     for chapter in bible[book]:
 #         for verse in bible[book][chapter]:
 #             words.extend(bible[book][chapter][verse].split())
-for verse in text:
-    words.extend(text[verse].split())
+for surah in quran:
+    for verse in quran[surah]:
+        words.extend(quran[surah][verse].split())
+# for verse in text:
+#     words.extend(text[verse].split())
 wordsLength = len(words)
 
-# response = input("Search for: ").lower()
+response = input("Search for: ").lower()
 counts = {}
-for i in range(wordsLength):
-    response = words[i].lower()
-    results = 0
+# for i in range(wordsLength):
+#     response = words[i].lower()
+results = 0
     # for book in bible:
     #     for chapter in bible[book]:
     #         for verse in bible[book][chapter]:
     #             if response in bible[book][chapter][verse].lower():
-    for j in range(wordsLength):
-        if response == words[j].lower():
-            # print(book, chapter, ":", verse)
-            results += 1
+    # for surah in quran:
+    #     for verse in quran[surah]:
+    #         if response in quran[surah][verse].lower():
+for j in range(wordsLength):
+    if response == words[j].lower():
+        # print(book, chapter, ":", verse)
+        results += 1
+print(str(results) + " of " + str(response) + " have been found")
     # for verse in text:
     #     if response in text[verse].lower():
     #         print(verse)
     #         results += 1
-    counts[response] = results
+counts[response] = results
     #print(str(results) + " examples of "+ response + " have been found")
 
 surface = "#fcfcfb"

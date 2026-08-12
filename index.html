@@ -13,16 +13,17 @@
         <button onclick = "initializeWordSearch()">Search</button>
     </div>
     <div class = "results">
-        <p id="reusltstext">[Results]</p>
+        <p id="resultstext">[Results]</p>
     </div>
 </body>
 <script>
         function initializeWordSearch()
         {
+            let references = [];
             let input = document.getElementById("wordinput").value.toLowerCase();
-            console.log(searchWordinVerse(input))
+            searchWordinVerse(input, references)
         }
-        function searchWordinVerse(word)
+        function searchWordinVerse(word, list)
         {
             let results = 0;
             for (let book in bible)
@@ -31,17 +32,17 @@
                 {
                     for (let verse in bible[book][chapter])
                     {
-                        
                         if (bible[book][chapter][verse].toLowerCase().includes(word))
                         {
-                            console.log(book + " " + chapter + ":" + verse);
+                            list.push(book + " " + chapter + ":" + verse);
                             results++;
                         }
                     }
                 }
             }
-            return "Found: " + results + " results \n" + results/31102 * 100 + "% of verses have " + word
-        
+            let summary = "Found: " + results + " results, " + (results / 31102 * 100).toFixed(2) + "% of verses have \"" + word + "\"";
+            let result = summary + "\n" + list.join("\n");
+            document.getElementById("resultstext").innerText = result;
         }
 </script>
 </html>
