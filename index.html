@@ -21,11 +21,12 @@
         {
             let references = [];
             let input = document.getElementById("wordinput").value.toLowerCase();
-            searchWordinVerse(input, references)
+            searchWordinVerse(input, references);
         }
         function searchWordinVerse(word, list)
         {
             let results = 0;
+            let reference;
             for (let book in bible)
             {
                 for (let chapter in bible[book])
@@ -34,7 +35,9 @@
                     {
                         if (bible[book][chapter][verse].toLowerCase().includes(word))
                         {
-                            list.push(book + " " + chapter + ":" + verse);
+                            let link = createLink(book,chapter,verse);
+                            let reference = "<a href=\"" + link + "\">" + book + " " + chapter + ":" + verse + "</a>"
+                            list.push(reference);
                             results++;
                         }
                     }
@@ -42,7 +45,12 @@
             }
             let summary = "Found: " + results + " results, " + (results / 31102 * 100).toFixed(2) + "% of verses have \"" + word + "\"";
             let result = summary + "\n" + list.join("\n");
-            document.getElementById("resultstext").innerText = result;
+            document.getElementById("resultstext").innerHTML = result.replace(/\n/g, "<br>");
+        }
+        function createLink(book,chapter,verse)
+        {
+            let link = "https://www.biblegateway.com/passage/?search="+book+"%"+chapter+verse+"%3A28&version=KJV";
+            return link
         }
 </script>
 </html>
