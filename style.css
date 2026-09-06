@@ -1,0 +1,132 @@
+/* Google-style search layout, adapted for the Bible search engine */
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    font-family: arial, sans-serif;
+    color: #202124;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Centered "home page" state before a search has results.
+   Once results exist, .has-results (added via JS-free CSS trick below)
+   is not required -- the page simply grows naturally. */
+.page {
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 12vh;
+    padding-bottom: 40px;
+}
+
+h1 {
+    font-size: 56px;
+    font-weight: 500;
+    margin: 0 0 30px 0;
+    letter-spacing: -1px;
+}
+
+/* Google-esque multicolor letters for the title */
+h1 .g-blue   { color: #4285F4; }
+h1 .g-red    { color: #EA4335; }
+h1 .g-yellow { color: #FBBC05; }
+h1 .g-green  { color: #34A853; }
+
+.search {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+}
+
+.search-box {
+    width: 100%;
+    max-width: 560px;
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    border: 1px solid #dfe1e5;
+    border-radius: 24px;
+    box-shadow: none;
+    transition: box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.search-box:hover,
+.search-box:focus-within {
+    box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
+    border-color: rgba(223, 225, 229, 0);
+}
+
+.search-box .search-icon {
+    color: #9aa0a6;
+    margin-right: 12px;
+    font-size: 18px;
+    flex-shrink: 0;
+}
+
+#wordinput {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    background: transparent;
+}
+
+.search-buttons {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.search-buttons button {
+    background-color: #f8f9fa;
+    border: 1px solid #f8f9fa;
+    border-radius: 4px;
+    color: #3c4043;
+    font-size: 14px;
+    padding: 0 16px;
+    height: 36px;
+    cursor: pointer;
+}
+
+.search-buttons button:hover {
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    background-color: #f1f3f4;
+    border: 1px solid #dadce0;
+    color: #202124;
+}
+
+.results {
+    width: 100%;
+    max-width: 700px;
+    padding: 0 20px 60px 20px;
+}
+
+#resultstext {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #202124;
+    word-wrap: break-word;
+}
+
+#resultstext a {
+    color: #1a0dab;
+    text-decoration: none;
+}
+
+#resultstext a:hover {
+    text-decoration: underline;
+}

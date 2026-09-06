@@ -4,16 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bible search engine</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <script src="en_kjv.js"></script>
-    <h1>Bible Dictionary</h1>
-    <div class = "search">
-        <input type="text" id="wordinput" name="wordinput">
-        <button onclick = "initializeWordSearch()">Search</button>
-    </div>
-    <div class = "results">
-        <p id="resultstext">[Results]</p>
+    <div class="page">
+        <h1>
+            <span class="g-blue">B</span><span class="g-red">i</span><span class="g-yellow">b</span><span class="g-blue">l</span><span class="g-green">e</span> Dictionary
+        </h1>
+        <div class = "search">
+            <div class="search-box">
+                <span class="search-icon">&#128269;</span>
+                <input type="text" id="wordinput" name="wordinput" onkeydown="if (event.key === 'Enter') initializeWordSearch()">
+            </div>
+            <div class="search-buttons">
+                <button onclick = "initializeWordSearch()">Bible Search</button>
+            </div>
+        </div>
+        <div class = "results">
+            <p id="resultstext">[Results]</p>
+        </div>
     </div>
 </body>
 <script>
@@ -50,6 +60,7 @@
         function createLink(book,chapter,verse)
         {
             let link = "https://www.biblegateway.com/passage/?search="+book+"%"+chapter+verse+"%3A28&version=KJV";
+            console.log(link);
             return link
         }
 </script>
